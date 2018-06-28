@@ -1,6 +1,5 @@
 import colorama
-
-def handle(client, broadcast, users, connected_clients, server_commands):
+def handle(client, broadcast, users, connected_clients):
     username = client.recv(1024).decode("utf8")
 
     while username in users:
@@ -20,15 +19,16 @@ def handle(client, broadcast, users, connected_clients, server_commands):
         msg = client.recv(1024)
 
         if msg.lower() == bytes("/help", "utf8"):
-            client.send(bytes(server_commands, "utf8"))
+            COMMANDS = ["/help", "/leave", "/users"]
+            client.send(bytes("AVAILABLE COMMANDS: {}\n".format(COMMANDS), "utf8"))
 
         elif msg.lower() == bytes("/users", "utf8"):
             client.send(bytes("CONNECTED USERS({}): {}\n".format(len(users), users), "utf8"))
 
         elif msg.lower() == bytes("/leave", "utf8"):
             client.close()
-            del connected_clients[client]
             broadcast(bytes("%s has left" % username))
+            del connected_clients[client]
             break
 
         else:
