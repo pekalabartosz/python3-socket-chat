@@ -1,13 +1,6 @@
 import socket, threading, colorama
 from handlers import connection, message
 
-with open("server_commands.txt", "r") as f:
-    for content in f:
-        server_commands = content
-
-        print("server_commands.txt loaded")
-
-
 def acceptingConnections():
     while True:
         client, client_address = server.accept()
@@ -21,7 +14,7 @@ def acceptingConnections():
 
 
 def handlingConnections(client):
-    connection.handle(client, broadcast, users, connected_clients, server_commands)
+    connection.handle(client, broadcast, users, connected_clients)
 
 
 def broadcast(msg, sender = "", client = ""):
