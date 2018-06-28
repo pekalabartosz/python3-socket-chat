@@ -1,3 +1,14 @@
+logo = """
+ ██████╗██╗  ██╗ █████╗ ████████╗
+██╔════╝██║  ██║██╔══██╗╚══██╔══╝
+██║     ███████║███████║   ██║
+██║     ██╔══██║██╔══██║   ██║
+╚██████╗██║  ██║██║  ██║   ██║
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝
+---------------------------client
+
+"""
+
 import socket, threading, os, colorama, getpass
 colorama.init(convert = True)
 
@@ -20,9 +31,9 @@ class Task:
 
 
 #setting-up client
-print("| socket python3 chat |")
-host = input("IP: ")
-port = input("PORT: ")
+print(logo)
+host = input(">>IP: ")
+port = input(">>PORT: ")
 
 if not host:
     host = "127.0.0.1"
@@ -35,7 +46,13 @@ else:
     port = int(port)
 
 if bool(host) == True and bool(port) == True:
-    os.system("cls")
+    try:
+        os.system("cls")
+        os.system("clear")
+    except Exception as err:
+        pass
+
+
     address = (host, port)
 
     clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
