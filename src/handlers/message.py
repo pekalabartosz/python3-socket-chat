@@ -1,6 +1,6 @@
 def handle(msg, sender, client, connected_clients):
     otherClients = {}
-    author = sender[5:-6].strip()
+    author = sender[5:-6]
 
     for key, value in connected_clients.items():
         if value != author:
